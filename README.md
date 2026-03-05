@@ -1,2 +1,6 @@
-# chairwomans-capstone
-26-1 캡스톤디자인과창업프로젝트 레포지토리
+## 👥 팀원
+| 역할 | 이름 |
+|-----|-----|
+| 팀장 | [설영은](https://github.com/0euun) |
+| 팀원 | [신지민](https://github.com/zziminally) |
+| 팀원 | [윤희서](https://github.com/HSYoon124) |
