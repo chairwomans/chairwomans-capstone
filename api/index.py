@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__, template_folder="../templates")
 
-@app.route("/calculator", methods=["GET", "POST"])
+@app.route("/api/calculator", methods=["GET", "POST"])
 def home():
     result = None
     error = None
