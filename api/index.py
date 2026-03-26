@@ -18,6 +18,4 @@ def home():
 
     return render_template("calculator.html", result=result, error=error)
 
-# Vercel serverless handler
-def handler(request, context):
-    return app(request, context)
+app = app
