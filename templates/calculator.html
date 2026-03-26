@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>덧셈 계산기</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Apple SD Gothic Neo", sans-serif;
+            background: linear-gradient(135deg, #fef6f9, #f4f9ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 320px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #444;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #f3f6fb;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            background: #e9f0ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #a5c9ff;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #8bb8ff;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .error {
+            margin-top: 15px;
+            color: #ff6b6b;
+            font-size: 14px;
+        }
+
+        .emoji {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>더하기</h1>
+
+        <form method="POST">
+            <input type="text" name="num1" placeholder="첫 번째 숫자" required>
+            <input type="text" name="num2" placeholder="두 번째 숫자" required>
+            <button type="submit">계산하기</button>
+        </form>
+
+        {% if result is not none %}
+            <div class="result">
+                결과: {{ result }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
