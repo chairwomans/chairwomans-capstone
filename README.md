@@ -19,7 +19,7 @@ AI가 이미지를 보는 순간 **"이건 스케치네", "이건 회화네"** �
 
 <br>
 
-## 1. Problem Statement
+## 1. 문제 제기
 
 CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함께 이해하는 멀티모달 Vision-Language Model(VLM)이다.
 별도의 학습 없이 텍스트 설명만으로 이미지를 분류하는 **Zero-Shot 분류** 능력이 강점이다.
@@ -30,7 +30,7 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 - **Domain Shift에 취약**: 스케치 도메인의 이미지가 들어와도, 회화 도메인의 이미지가 들어와도 항상 똑같은 평균 벡터로만 비교한다. 도메인이 달라지는 순간 이미지-텍스트 정렬이 어긋나 분류 성능이 크게 떨어진다.
 - **기존 Domain Adaptation의 한계**: 기존 방식은 새로운 도메인마다 추가 데이터를 모아 fine-tuning해야 해서 비효율적이고, 성능 향상도 제한적이다.
 
-## 2. Proposed Idea
+## 2. 제안 방법
 
 본 연구는 **추가 학습 없이, 테스트 시점에서만** 도메인을 스스로 파악하고 적응하는 **Test-Time Domain Adaptation** 방식을 제안한다.
 
@@ -41,7 +41,7 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 3. **동적 임베딩 재조합**: 추정된 도메인 가중치를 텍스트 임베딩과 이미지 임베딩 **양쪽에 동시에** 적용해, 해당 도메인에 최적화된 비교 기준을 실시간으로 생성한다.
 
 
-## 3. Pipeline
+## 3. 파이프라인
 
 전체 파이프라인은 **사전 단계**와 **테스트 단계**로 구성된다.
 
@@ -79,14 +79,14 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 최종 클래스 분류
 ```
 
-## 4. Key Idea
+## 4. 핵심 아이디어
 
 - **Test-Time Domain Adaptation**: fine-tuning 없이 테스트 시점에서만 도메인에 적응한다. 새로운 도메인이 와도 추가 학습이 필요 없다.
 - **멀티모달 동시 적응**: 텍스트 임베딩만 바꾸는 게 아니라, 이미지 임베딩과 텍스트 임베딩 **양쪽을 동시에** 도메인에 맞게 조정해 정렬 품질을 높인다.
 - **MTA (MeanShift-based TTA)**: 단순 평균 대신 MeanShift 알고리즘으로 outlier를 자동 제거해 노이즈에 강한 이미지 임베딩을 획득한다.
 
 
-## 5. Related Research Area
+## 5. 관련 연구 분야
 
 본 연구는 다음 연구 분야의 교차 영역에 해당한다.
 
@@ -95,7 +95,7 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 - **Test-Time Adaptation (TTA)**: 추가 학습 없이 테스트 시점에서만 모델을 적응시키는 연구
 - **Prompt Engineering**: Zero-Shot 성능을 높이기 위한 텍스트 프롬프트 설계 연구
 
-## 6. Experiments
+## 6. 실험
 
 ### 데이터셋
 
