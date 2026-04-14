@@ -123,15 +123,13 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 
 ```
 - 런타임: GPU (A100 권장)
-- Python: 추후 업데이트 예정
-- 주요 라이브러리: 추후 업데이트 예정
 ```
 
 ## 8. 참고 자료
 
 | 자료 | 링크 |
 |------|------|
-| CLIP 공식 코드 | https://github.com/openai/CLIP |
+| CLIP | https://github.com/openai/CLIP |
 | DiffTPT | https://github.com/chunmeifeng/DiffTPT |
 | MaPLe | https://github.com/muzairkhattak/multimodal-prompt-learning |
 | MTA | https://github.com/MaxZanella/MTA |
