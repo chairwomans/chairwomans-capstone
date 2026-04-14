@@ -30,6 +30,8 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 - **Domain Shift에 취약**: 스케치 도메인의 이미지가 들어와도, 회화 도메인의 이미지가 들어와도 항상 똑같은 평균 벡터로만 비교한다. 도메인이 달라지는 순간 이미지-텍스트 정렬이 어긋나 분류 성능이 크게 떨어진다.
 - **기존 Domain Adaptation의 한계**: 기존 방식은 새로운 도메인마다 추가 데이터를 모아 fine-tuning해야 해서 비효율적이고, 성능 향상도 제한적이다.
 
+<br>
+
 ## 2. 제안 방법
 
 본 연구는 **추가 학습 없이, 테스트 시점에서만** 도메인을 스스로 파악하고 적응하는 **Test-Time Domain Adaptation** 방식을 제안한다.
@@ -40,6 +42,7 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 2. **도메인 자동 추정**: m*와 도메인 프롬프트 임베딩 간 코사인 유사도를 계산해 "이 이미지가 어떤 도메인인지"를 확률적으로 추정한다.
 3. **동적 임베딩 재조합**: 추정된 도메인 가중치를 텍스트 임베딩과 이미지 임베딩 **양쪽에 동시에** 적용해, 해당 도메인에 최적화된 비교 기준을 실시간으로 생성한다.
 
+<br>
 
 ## 3. 파이프라인
 
@@ -79,12 +82,15 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 최종 클래스 분류
 ```
 
+<br>
+
 ## 4. 핵심 아이디어
 
 - **Test-Time Domain Adaptation**: fine-tuning 없이 테스트 시점에서만 도메인에 적응한다. 새로운 도메인이 와도 추가 학습이 필요 없다.
 - **멀티모달 동시 적응**: 텍스트 임베딩만 바꾸는 게 아니라, 이미지 임베딩과 텍스트 임베딩 **양쪽을 동시에** 도메인에 맞게 조정해 정렬 품질을 높인다.
 - **MTA (MeanShift-based TTA)**: 단순 평균 대신 MeanShift 알고리즘으로 outlier를 자동 제거해 노이즈에 강한 이미지 임베딩을 획득한다.
 
+<br>
 
 ## 5. 관련 연구 분야
 
@@ -94,6 +100,8 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 - **Domain Adaptation / Domain Generalization**: domain shift 환경에서의 모델 강건성 연구
 - **Test-Time Adaptation (TTA)**: 추가 학습 없이 테스트 시점에서만 모델을 적응시키는 연구
 - **Prompt Engineering**: Zero-Shot 성능을 높이기 위한 텍스트 프롬프트 설계 연구
+
+<br>
 
 ## 6. 실험
 
@@ -117,6 +125,22 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 | **MTA (단독)** | 도메인 추정 없이 MeanShift TTA만 적용 | 도메인 가중 재조합의 실질적 기여도 측정 |
 | **MaPLe** | 멀티모달 프롬프트를 학습 데이터로 사전 학습 | 학습 기반 방법 대비 성능 상한선 참고용 |
 
+### 데모 실험 (MTA 베이스라인)
+ 
+MTA 단독 성능을 확인하기 위해 ImageNet-A 데이터셋 500개 샘플로 batch size별 예비 실험을 진행했다.
+ 
+| Batch Size | Acc@1 | Acc@5 |
+|------------|-------|-------|
+| 16 | 55.00% | 79.40% |
+| 32 | 54.80% | 78.40% |
+| 64 | 56.40% | 78.60% |
+ 
+> 실험 환경: Google Colab (GPU T4), ImageNet-A 500 샘플 subset, seed=1, ViT-B/16
+ 
+데모 코드는 MTA_test.ipynb에서 확인할 수 있다.
+
+<br>
+
 ## 7. 실행 환경
 
 본 연구는 **Google Colab** 환경에서 실행한다.
@@ -124,6 +148,8 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 ```
 - 런타임: GPU (A100 권장)
 ```
+
+<br>
 
 ## 8. 참고 자료
 
