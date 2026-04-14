@@ -1,20 +1,18 @@
-# ☁️ Multimodal domain adaptation
+# 🔍 Multimodal domain adaptation
 
 ## 1. 연구 배경 및 필요성
-- **문제 인식**: 지역, 센서, 데이터 수집 환경이 달라질 때 발생하는 기상 데이터 분포 차이로 인해 모델 성능이 떨어지는 문제를 해결하고자 한다.
-- **연구 목적**: 본 연구는 기상 데이터 기반 예측 모델을 연구 및 개발하는 연구자와 기상 서비스 개발자를 주요 대상으로 하며, 궁극적으로는 정확하고 신뢰성 높은 날씨 예측 정보를 필요로 하는 일반 사용자 및 산업 분야에 기여하는 것을 목표로 한다.
+- **문제 인식**: 테스트 이미지의 도메인(스케치, 회화, 위성사진 등)이 학습 도메인과 달라지는 domain shift 상황에서 CLIP과 같은 Vision-Language Model(VLM)의 이미지-텍스트 정렬이 어긋나 Zero-Shot 분류 성능이 저하되는 문제를 해결하고자 한다.
+- **연구 목적**: 본 연구는 멀티모달 모델 기반 이미지 분류 시스템을 연구 및 개발하는 연구자와 ML 엔지니어를 주요 대상으로 하며, 궁극적으로는 별도의 fine-tuning 없이 다양한 도메인 환경에서도 정확하고 강건한 Zero-Shot 이미지 분류가 가능한 시스템 개발에 기여하는 것을 목표로 한다.
 
 ## 2. 연구 방법론
 - **데이터/대상**
-  - Satellite imagery
-  - Weather radar data
-  - Numerical Weather Prediction (NWP) variables
-  - Surface station observations
-- **분석 방법**: Multimodal Feature Encoder, Feature Fusion, Domain Adaptation
+  - ImageNet 계열 5종 (ImageNet, ImageNet-A, ImageNet-V2, ImageNet-R, ImageNet-Sketch)
+  - 특정 도메인 10종 (SUN397, Aircraft, EuroSAT, StanfordCars, Food101, OxfordPets, Flower102, Caltech101, DTD, UCF101)
+- **분석 방법**: MeanShift 기반 MTA (Test-Time Augmentation), Test-Time Domain Adaptation, 동적 텍스트·이미지 임베딩 재조합
 - **핵심 가설**
-  - Multimodal representation learning은 단일 modality 모델보다 높은 일반화 성능을 보일 것이다.
-  - Domain adaptation을 적용한 모델은 새로운 지역 또는 센서 환경에서도 성능 저하가 적을 것이다.
-  - Feature-level alignment를 통해 domain-invariant representation을 학습할 수 있다.
+  - 테스트 이미지의 도메인을 자동으로 추정하여 텍스트·이미지 임베딩을 동적으로 재조합하면 고정 평균 프롬프트 앙상블 방식보다 높은 Zero-Shot 분류 성능을 보일 것이다.
+  - MeanShift 기반 MTA를 통해 outlier augmented view를 제거하면 보다 robust한 이미지 임베딩을 획득할 수 있을 것이다.
+  - 도메인 가중치를 텍스트와 이미지 임베딩에 동시에 적용하면 멀티모달 정렬 품질이 향상되어 domain shift 환경에서의 분류 정확도가 개선될 것이다.
 
 ## 3. 기대 효과 및 활용 방안
-- **학문적 기여**: 기상 데이터의 도메인 간 분포 차이 문제를 해결하는 방법론을 제시함으로써 향후 다양한 환경에서 활용 가능한 robust weather prediction models 개발에 기여할 수 있다.
+- **학문적 기여**: 멀티모달 도메인 적응 문제를 test-time에서 해결하는 방법론을 제시함으로써 향후 다양한 domain shift 환경에서 활용 가능한 robust Vision-Language Model 개발에 기여할 수 있다.
