@@ -34,10 +34,11 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 
 본 연구는 **추가 학습 없이, 테스트 시점에서만** 도메인을 스스로 파악하고 적응하는 **Test-Time Domain Adaptation** 방식을 제안한다.
 
-테스트 이미지가 들어오면 다음 두 가지를 동시에 수행한다.
+테스트 이미지가 들어오면 다음 세 가지를 순서대로 수행한다.
 
-1. **도메인 자동 추정**: 이미지 임베딩과 도메인 프롬프트 임베딩 간 코사인 유사도를 계산해 "이 이미지가 어떤 도메인인지"를 확률적으로 추정한다.
-2. **동적 임베딩 재조합**: 추정된 도메인 가중치를 텍스트 임베딩과 이미지 임베딩 **양쪽에 동시에** 적용해, 해당 도메인에 최적화된 비교 기준을 실시간으로 생성한다.
+1. **Augmentation**: 원본 이미지 1장으로부터 Stable Diffusion V2(63장)와 RandomCrop(64장)을 통해 총 128장의 augmented view를 생성하고, MeanShift 기반 MTA로 outlier를 제거해 robust한 이미지 임베딩 m*를 획득한다.
+2. **도메인 자동 추정**: m*와 도메인 프롬프트 임베딩 간 코사인 유사도를 계산해 "이 이미지가 어떤 도메인인지"를 확률적으로 추정한다.
+3. **동적 임베딩 재조합**: 추정된 도메인 가중치를 텍스트 임베딩과 이미지 임베딩 **양쪽에 동시에** 적용해, 해당 도메인에 최적화된 비교 기준을 실시간으로 생성한다.
 
 
 ## 3. Pipeline
@@ -109,9 +110,12 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 | | OxfordPets, Flower102, Caltech101, DTD, UCF101, SUN397 | 반려동물·꽃·객체·질감·행동·장면 |
 
 ### 비교 대상 (Baseline)
-- 기존 CLIP
-- MaPLe
-- TPT
+| 모델 | 방식 | 비교 목적 |
+|------|------|-----------|
+| **CLIP Zero-Shot** | 고정 평균 프롬프트 앙상블, 아무 적응 없이 분류 | 순수 베이스라인 — 우리 방법이 얼마나 개선되는지 측정 |
+| **TPT** | 테스트 시점에 프롬프트를 동적으로 튜닝 | 동일한 Test-Time Adaptation 설정에서의 직접 비교 |
+| **MTA (단독)** | 도메인 추정 없이 MeanShift TTA만 적용 | 도메인 가중 재조합의 실질적 기여도 측정 |
+| **MaPLe** | 멀티모달 프롬프트를 학습 데이터로 사전 학습 | 학습 기반 방법 대비 성능 상한선 참고용 |
 
 ## 7. 실행 환경
 
@@ -129,6 +133,10 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 |------|------|
 | CLIP 공식 코드 | https://github.com/openai/CLIP |
 | DiffTPT | https://github.com/chunmeifeng/DiffTPT |
+| MaPLe | https://github.com/muzairkhattak/multimodal-prompt-learning |
+| MTA | https://github.com/MaxZanella/MTA |
 
 - Radford et al., *Learning Transferable Visual Models From Natural Language Supervision* (CLIP), ICML 2021
-- 추후 추가 예정
+- Khattak et al., *MaPLe: Multi-Modal Prompt Learning*, CVPR 2023
+- Zanella et al., *On the Test-Time Zero-Shot Generalization of Vision-Language Models: Do We Really Need Prompt Learning?*, CVPR 2024
+- 추후 업데이트 예정
