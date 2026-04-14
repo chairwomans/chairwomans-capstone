@@ -137,7 +137,7 @@ MTA 단독 성능을 확인하기 위해 ImageNet-A 데이터셋 500개 샘플�
  
 > 실험 환경: Google Colab (GPU T4), ImageNet-A 500 샘플 subset, seed=1, ViT-B/16
  
-데모 코드는 MTA_test.ipynb에서 확인할 수 있다.
+데모 코드는 [`MTA_test.ipynb`](https://github.com/chairwomans/chairwomans-capstone/blob/main/MTA_test.ipynb)에서 확인할 수 있다.
 
 <br>
 
