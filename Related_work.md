@@ -1,9 +1,7 @@
 ## Related Works
-> Shu et al., *Test-Time Prompt Tuning for Zero-Shot Generalization in Vision-Language Models*, NeurIPS 2022
-> <br>
-> Khattak et al., *MaPLe: Multi-Modal Prompt Learning*, CVPR 2023
-> <br>
-> Zanella et al., *On the Test-Time Zero-Shot Generalization of Vision-Language Models: Do We Really Need Prompt Learning?*, CVPR 2024
+- Shu et al., *Test-Time Prompt Tuning for Zero-Shot Generalization in Vision-Language Models*, NeurIPS 2022
+- Khattak et al., *MaPLe: Multi-Modal Prompt Learning*, CVPR 2023
+- Zanella et al., *On the Test-Time Zero-Shot Generalization of Vision-Language Models: Do We Really Need Prompt Learning?*, CVPR 2024
 
 ### Test-Time Prompt Tuning for Zero-Shot Generalization in Vision-Language Models
 TPT는 단일 테스트 샘플만으로 추가 학습 데이터 없이 프롬프트를 적응적으로 튜닝하는 방법이다. 테스트 이미지의 다양한 augmented view를 생성한 뒤, 예측의 주변 엔트로피(marginal entropy)를 최소화하는 방향으로 프롬프트를 최적화한다. 이때 신뢰도가 낮은 augmented view는 confidence selection으로 필터링한다. ImageNet-A/V2/R/Sketch 등 자연 분포 변화 벤치마크에서 CLIP 대비 평균 3.6% 향상을 달성하며, 별도 훈련 데이터가 필요한 CoOp/CoCoOp과 동등한 수준의 성능을 보인다.
