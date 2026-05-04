@@ -46,6 +46,13 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 
 ## 3. 기술 / 구현
 
+### 사용 기술
+- Python: 전체 실험 코드 및 모델 추론 파이프라인 구현
+- PyTorch: CLIP 모델 로딩, 임베딩 추출, 텐서 연산 처리
+- CLIP: 이미지-텍스트 임베딩 추출 및 Zero-Shot 분류의 기반 모델
+- Stable Diffusion V2: 테스트 이미지의 다양한 augmented view 생성
+- MeanShift / MTA: 여러 augmented view 중 outlier를 제거하고 robust한 이미지 임베딩 생성
+
 전체 파이프라인은 **사전 단계**와 **테스트 단계**로 구성된다.
 
 ### 사전 단계 (Pre-processing)
