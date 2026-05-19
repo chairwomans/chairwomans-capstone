@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Chairwomans</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-inner">
+    <span class="top-title" id="topTitle">Team</span>
+    <span class="top-badge" id="topBadge">Research</span>
+  </div>
+</div>
+
+<div class="pages">
+
+  <!-- PAGE 1: TEAM -->
+  <div class="page active" id="p0">
+    <div class="eyebrow">Team1 이사장님</div>
+    <div class="heading">함께 연구하는 사람들</div>
+    <p class="sub">24학번 모임의 장, 이사장님을 소개합니다</p>
+
+    <div class="mscroll">
+      <div class="mcard">
+        <a href="https://github.com/0euun" style="text-decoration: none; color: inherit;">
+        <div class="mcard-top mc1"><div class="avatar av1"><i data-lucide="cat"></i></div></div>
+        <div class="mcard-bot">
+          <div class="mname">설영은</div>
+          <div class="mrole">Team Lead · Engineer</div>
+          <span class="mtag mt1">Augmentation · Web</span>
+        </div>
+        </a>
+      </div>
+      <div class="mcard">
+        <a href="https://github.com/zziminally" style="text-decoration: none; color: inherit;">
+        <div class="mcard-top mc2"><div class="avatar av2"><i data-lucide="dog"></i></div></div>
+        <div class="mcard-bot">
+          <div class="mname">신지민</div>
+          <div class="mrole">Engineer</div>
+          <span class="mtag mt2">Embedding · MTA</span>
+        </div>
+        </a>
+      </div>
+      <div class="mcard">
+        <a href="https://github.com/HSYoon124" style="text-decoration: none; color: inherit;">
+        <div class="mcard-top mc3"><div class="avatar av3"><i data-lucide="panda"></i></div></div>
+        <div class="mcard-bot">
+          <div class="mname">윤희서</div>
+          <div class="mrole">Engineer</div>
+          <span class="mtag mt3">Domain Prompt</span>
+        </div>
+        </a>
+      </div>
+      <div class="mcard">
+        <a href="https://github.com/chairwomans/chairwomans-capstone" style="text-decoration: none; color: inherit;">
+        <div class="mcard-top mc4"><div class="avatar av4"><i data-lucide="users-round"></i></div></div>
+        <div class="mcard-bot">
+          <div class="mname">이사장님</div>
+          <div class="mrole">Team1</div>
+          <span class="mtag mt4">Chairwomans</span>
+        </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="card rlist">
+      <div class="ritem">
+        <div class="ribox"><i data-lucide="microscope"></i></div>
+        <div><div class="riname">Image Augmentation & MTA</div><div class="ridesc">테스트 이미지 128장(Stable Diffusion + RandomCrop), MeanShift로 outlier 제거 및 robust 임베딩 획득</div></div>
+      </div>
+      <div class="ritem">
+        <div class="ribox"><i data-lucide="crosshair"></i></div>
+        <div><div class="riname">Domain Assumption</div><div class="ridesc">이미지-도메인 프롬프트 간 코사인 유사도 계산<br>→ Softmax로 도메인 가중치 추정</div></div>
+      </div>
+      <div class="ritem">
+        <div class="ribox"><i data-lucide="target"></i></div>
+        <div><div class="riname">Final Classification</div><div class="ridesc">도메인 가중치 기반 텍스트 임베딩 가중 평균 + 이미지 임베딩 동시 동적 조정, 코사인 유사도로 최종 클래스 결정</div></div>
+      </div>
+      <div class="ritem">
+        <div class="ribox"><i data-lucide="database"></i></div>
+        <div><div class="riname">Dataset</div><div class="ridesc">ImageNet 계열 5종(A/V2/R/Sketch) + 도메인별 10종(SUN397, DTD, EuroSAT, etc.)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: PROJECT -->
+  <div class="page" id="p1">
+    <div class="eyebrow">Project</div>
+    <div class="heading">멀티모달 도메인 적응 연구</div>
+    <p class="sub">테스트 이미지의 도메인을 자동으로 파악해 텍스트와 이미지 임베딩을 동적으로 재조합함으로써 도메인 변화에도 정확한 CLIP 기반 Zero-Shot 이미지 분류 연구</p>
+
+    <div class="tags">
+      <span class="tag tb">Zero-shot Classification</span>
+      <span class="tag tg">Domain Shift</span>
+      <span class="tag tr">Prompt Ensembling</span>
+    </div>
+
+    <div class="card">
+      <div class="clabel">Problem</div>
+      <div class="ctitle">기존 방식의 한계</div>
+      <div class="cbody">기존 CLIP은 텍스트 프롬프트를 평균 내어 클래스 대표 벡터를 고정합니다. 도메인이 달라져도 동일한 벡터로만 비교하기 때문에 Domain Shift 상황에서 이미지-텍스트 정렬이 어긋나 분류 성능이 크게 떨어집니다.</div>
+    </div>
+
+    <div class="compare">
+      <div class="cc cbefore">
+        <div class="cclabel">Before</div>
+        <div class="cctext">80 templates 기준<br>평균 → 고정 벡터<br>Domain 반영 X</div>
+      </div>
+      <div class="cc cafter">
+        <div class="cclabel">After</div>
+        <div class="cctext">Domain 추정<br>가중 평균 → 동적 벡터<br>Domain 반영 O</div>
+      </div>
+    </div>
+
+    <div class="hcard">
+      <div class="hlabel">Key Insight</div>
+      <div class="htext">"Sketch이면 sketch template에, photo라면 photo template에 더 높은 weight를."</div>
+      <div class="hsub">테스트 이미지 domain 실시간 추정 → 텍스트·이미지 임베딩에 동적 반영 → domain shift에 강건한 zero-shot classification</div>
+    </div>
+
+    <div class="card">
+      <div class="clabel">Datasets · Domain Shift</div>
+      <div class="chips">
+        <span class="chip">ImageNet</span><span class="chip">ImageNet-A</span>
+        <span class="chip">ImageNet-V2</span><span class="chip">ImageNet-R</span>
+        <span class="chip">ImageNet-Sketch</span>
+      </div>
+      <div class="div"></div>
+      <div class="clabel">Datasets · Domain-specific (10)</div>
+      <div class="chips">
+        <span class="chip">SUN397</span><span class="chip">Aircraft</span><span class="chip">EuroSAT</span>
+        <span class="chip">StanfordCars</span><span class="chip">Food101</span><span class="chip">OxfordPets</span>
+        <span class="chip">Flower102</span><span class="chip">Caltech101</span><span class="chip">DTD</span><span class="chip">UCF101</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: METHOD -->
+  <div class="page" id="p2">
+    <div class="eyebrow">Method</div>
+    <div class="heading">파이프라인</div>
+    <p class="sub">전처리 단계와 테스트 단계로 구성됩니다</p>
+
+    <div class="arch">
+      <div class="clabel">Overview</div>
+      <div class="aflow">
+        <span class="anode an-w">Prompt Design</span><span class="aarr">→</span>
+        <span class="anode an-w">Input</span><span class="aarr">→</span>
+        <span class="anode an-b">Augmentation</span><span class="aarr">→</span>
+        <span class="anode an-b">MTA</span><span class="aarr">→</span>
+        <span class="anode an-g">Domain Assumption</span><span class="aarr">→</span>
+        <span class="anode an-w">Classification</span>
+      </div>
+    </div>
+
+    <div class="phase-label">전처리 단계</div>
+    <hr class="phase-divider">
+    <div class="srow"><div class="sleft"><div class="snum">0</div><div class="scon"></div></div>
+    <div class="sbody"><div class="stitle">Domain Prompt Design</div><div class="sdesc">도메인 추정을 위한 텍스트 프롬프트 구성. 각 도메인별 특징을 반영한 프롬프트를 사전 정의하여 도메인 추정에 활용.</div><span class="schip">Domain prompt</span></div></div>
+
+    <div class="phase-label">테스트 단계</div>
+    <hr class="phase-divider">
+    <div class="srow"><div class="sleft"><div class="snum">1</div><div class="scon"></div></div>
+    <div class="sbody"><div class="stitle">Image Input & Augmentation</div><div class="sdesc">원본 1장에서 RandomCrop 127장 생성, 총 128개의 augmented view 획득. (비용 여유 시 Stable Diffusion 63장 + RandomCrop 64장 생성)</div><span class="schip">128 views total</span></div></div>
+
+    <div class="srow"><div class="sleft"><div class="snum">2</div><div class="scon"></div></div>
+    <div class="sbody"><div class="stitle">Visual Encoder</div><div class="sdesc">각 view를 ViT에 통과시켜 embedding vector 추출.</div><span class="schip">ViT</span></div></div>
+
+    <div class="srow"><div class="sleft"><div class="snum">3</div><div class="scon"></div></div>
+    <div class="sbody"><div class="stitle">MTA — MeanShift</div><div class="sdesc">Embedding space에서 밀도 높은 cluster의 mode m* 추출. Outlier 자동 제거해 robust한 image representation 획득.</div><span class="schip">Outlier auto-removal</span></div></div>
+
+    <div class="srow"><div class="sleft"><div class="snum">4</div><div class="scon"></div></div>
+    <div class="sbody"><div class="stitle">Domain Assumption</div><div class="sdesc">Domain prompt embedding과 m* 간 코사인 유사도 계산 → softmax로 domain weight 산출.</div><span class="schip">cosine sim + softmax</span></div></div>
+
+    <div class="srow"><div class="sleft"><div class="snum">5</div><div class="scon"></div></div>
+    <div class="sbody"><div class="stitle">Domain-Weighted Embedding</div><div class="sdesc">추정된 domain weight를 텍스트와 이미지에 동일하게 적용 후 각각 dynamic prototype 생성.</div><span class="schip">Text · Image Embedding</span></div></div>
+
+    <div class="srow"><div class="sleft"><div class="snum">6</div></div>
+    <div class="sbody"><div class="stitle">Final Classification</div><div class="sdesc">Text와 image embedding 간 cosine similarity 비교 → argmax로 최종 class 결정.</div><span class="schip">argmax cosine similarity</span></div></div>
+  </div>
+
+  <!-- PAGE 4: DEMO -->
+  <div class="page" id="p3">
+    <div class="eyebrow">Demo</div>
+    <div class="heading">도메인 추정</div>
+    <p class="sub">이미지를 업로드하면 domain을 자동 추정합니다</p>
+
+    <input type="file" id="fileInput" accept="image/*">
+    <div class="uzone" id="uzone" onclick="document.getElementById('fileInput').click()">
+      <div id="upholder">
+        <div class="uibox"><i data-lucide="image"></i></div>
+        <div class="utxt">Upload Image</div>
+        <div class="usub">탭해서 사진 선택</div>
+      </div>
+      <img id="prevImg" alt="preview">
+    </div>
+
+    <div id="csec" style="display:none;margin-bottom:14px;">
+      <div class="slabel"><span class="sdot"></span>RandomCrop × 128</div>
+      <div class="cgrid" id="cgrid"></div>
+    </div>
+
+    <button class="rbtn" id="rbtn" onclick="runDemo()">Domain Estimation 실행</button>
+
+    <div class="rwrap" id="rwrap">
+      <div class="mtacard">
+        <div class="slabel" style="margin-bottom:0"><span class="sdot"></span>MTA · 128 View Embeddings</div>
+        <div class="mdots" id="mdots"></div>
+        <div class="mnote" id="mnote"><strong>0개</strong> outlier 제거 → robust mode m* 획득</div>
+      </div>
+      <div class="rhero">
+        <div class="rhtop">
+          <div class="rhlabel">Estimated Domain</div>
+          <div class="rhdomain" id="rhdomain">—</div>
+          <div class="rhconf" id="rhconf">—</div>
+        </div>
+        <div class="blist" id="blist"></div>
+        <div class="wbanner"><div class="wdot"></div><div class="wtxt" id="wtxt">추정 결과가 여기에 표시됩니다</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 5: NEXT -->
+  <div class="page" id="p4">
+    <div class="eyebrow">Next</div>
+    <div class="heading">향후 계획</div>
+    <p class="sub">Domain Assuumption 이후 확장할 연구 방향과 남은 과제들입니다</p>
+
+    <div class="card" style="border-color:rgba(30,200,128,0.3);margin-bottom:12px;">
+      <div class="clabel" style="color:var(--green);">Completed</div>
+      <div class="ritem" style="padding:10px 0;border-bottom:1px solid var(--line);">
+        <div class="ribox"><i data-lucide="image"></i></div>
+        <div><div class="riname">Image Input & Augmentation</div><div class="ridesc">원본 1장 → 128 augmented views 생성</div></div>
+      </div>
+      <div class="ritem" style="padding:10px 0;border-bottom:1px solid var(--line);">
+        <div class="ribox"><i data-lucide="filter"></i></div>
+        <div><div class="riname">MTA - MeanShift</div><div class="ridesc">Outlier 제거 → robust mode m* 획득</div></div>
+      </div>
+      <div class="ritem" style="padding:10px 0;border-bottom:none;">
+        <div class="ribox"><i data-lucide="scan-search"></i></div>
+        <div><div class="riname">Domain Assumption</div><div class="ridesc">Cosine similarity + softmax → domain weight 산출</div></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="clabel" style="color:var(--yellow);">Up Next</div>
+
+      <div class="ritem" style="padding:12px 0;border-bottom:1px solid var(--line);">
+        <div class="ribox"><i data-lucide="sliders-horizontal"></i></div>
+        <div>
+          <div class="riname">Domain-Weighted Embedding</div>
+          <div class="ridesc">추정된 domain weight를 텍스트와 이미지에 동일하게 적용.</div>
+        </div>
+      </div>
+      <div class="ritem" style="padding:12px 0;border-bottom:none;">
+        <div class="ribox"><i data-lucide="target"></i></div>
+        <div>
+          <div class="riname">Final Classification</div>
+          <div class="ridesc">Image embedding v*와 text embedding t* 간 cosine similarity 비교 → argmax로 최종 class 결정.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="clabel" style="color:var(--red);">Experiments & Ablation</div>
+      <div class="ritem" style="padding:12px 0;border-bottom:1px solid var(--line);">
+        <div class="ribox"><i data-lucide="thermometer"></i></div>
+        <div>
+          <div class="riname">Temperature τ 최적화</div>
+          <div class="ridesc">Temperature τ에 따라 도메인 추정 결과가 달라짐<br>→ ablation study로 최적값 탐색</div>
+        </div>
+      </div>
+      <div class="ritem" style="padding:12px 0;border-bottom:1px solid var(--line);">
+        <div class="ribox"><i data-lucide="package"></i></div>
+        <div>
+          <div class="riname">Augmentation 전략 비교</div>
+          <div class="ridesc">Stable Diffusion 기반 vs RandomCrop only<br>— 비용 대비 성능 trade-off 분석</div>
+        </div>
+      </div>
+      <div class="ritem" style="padding:12px 0;border-bottom:none;">
+        <div class="ribox"><i data-lucide="database"></i></div>
+        <div>
+          <div class="riname">Dataset 최종 선정</div>
+          <div class="ridesc">ImageNet 계열 5종 + domain-specific 10종 중 실험 범위 결정</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hcard">
+      <div class="hlabel">Goal</div>
+      <div class="htext">"Domain shift에도 흔들리지 않는 zero-shot classification"</div>
+      <div class="hsub">테스트 이미지의 도메인을 자동으로 파악해 텍스트와 이미지 임베딩을 동적으로 재조합, domain shift에 robust한 분류 성능 달성</div>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" onclick="goPage(0)"><span class="nav-icon"><i data-lucide="users"></i></span><span class="nav-label">Team</span></button>
+  <button class="nav-btn" onclick="goPage(1)"><span class="nav-icon"><i data-lucide="clipboard"></i></span><span class="nav-label">Project</span></button>
+  <button class="nav-btn" onclick="goPage(2)"><span class="nav-icon"><i data-lucide="settings"></i></span><span class="nav-label">Method</span></button>
+  <button class="nav-btn" onclick="goPage(3)"><span class="nav-icon"><i data-lucide="flask-conical"></i></span><span class="nav-label">Demo</span></button>
+  <button class="nav-btn" onclick="goPage(4)"><span class="nav-icon"><i data-lucide="arrow-right-circle"></i></span><span class="nav-label">Next</span></button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script src="./js/main.js"></script>
+</body>
+</html>
