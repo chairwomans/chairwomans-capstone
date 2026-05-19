@@ -51,7 +51,7 @@ function estimateSims(s){
   });
 }
 
-const DOMS=['sketch','photo','painting','clipart','art'],EMJ={'sketch':'✏️','photo':' ','painting':' ','clipart':' ️','art':' ️'};
+const DOMS=['sketch','photo','painting','clipart','art'],EMJ={'sketch':' ','photo':' ','painting':' ','clipart':' ️','art':' ️'};
 
 async function runDemo(){
   if(!src){toast('먼저 이미지를 업로드해주세요');return;}
