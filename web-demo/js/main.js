@@ -1,0 +1,89 @@
+const TITLES=['Team','Project','Method','Demo', 'Next'],BADGES=['Research','Overview','Pipeline','Try It', 'Next Steps'];
+let cur=0;
+const pages=document.querySelectorAll('.page'),navs=document.querySelectorAll('.nav-btn');
+function goPage(i){pages[cur].classList.remove('active');navs[cur].classList.remove('active');cur=i;pages[i].classList.add('active');navs[i].classList.add('active');pages[i].scrollTop=0;document.getElementById('topTitle').textContent=TITLES[i];document.getElementById('topBadge').textContent=BADGES[i];}
+
+const TAU = 0.07;
+
+let src=null;
+document.getElementById('fileInput').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{
+    src=ev.target.result;
+    const img=document.getElementById('prevImg');img.src=src;img.style.display='block';
+    document.getElementById('upholder').style.display='none';
+    document.getElementById('uzone').classList.add('has');
+    buildCrops(src);toast('Image loaded — 실행 버튼을 눌러주세요');
+  };r.readAsDataURL(f);
+});
+
+function buildCrops(s){
+  const sec=document.getElementById('csec'),grid=document.getElementById('cgrid');
+  grid.innerHTML='';sec.style.display='block';
+  const img=new Image();img.onload=()=>{
+    const od=document.createElement('div');od.className='ccell orig';
+    const oi=document.createElement('img');oi.src=s;od.appendChild(oi);grid.appendChild(od);
+    for(let i=0;i<6;i++){
+      const c=document.createElement('canvas');c.width=64;c.height=64;
+      const ctx=c.getContext('2d');
+      const sz=Math.min(img.width,img.height)*(0.45+Math.random()*0.4);
+      const x=Math.random()*Math.max(0,img.width-sz),y=Math.random()*Math.max(0,img.height-sz);
+      ctx.drawImage(img,x,y,sz,sz,0,0,64,64);
+      const d=document.createElement('div');d.className='ccell';d.appendChild(c);grid.appendChild(d);
+    }
+    const m=document.createElement('div');m.className='cmore';m.textContent='+121';grid.appendChild(m);
+  };img.src=s;
+}
+
+function softmax(arr,tau){const sc=arr.map(v=>v/tau),mx=Math.max(...sc),ex=sc.map(v=>Math.exp(v-mx)),s=ex.reduce((a,b)=>a+b,0);return ex.map(v=>v/s);}
+
+function estimateSims(s){
+  return new Promise(res=>{
+    const img=new Image();img.onload=()=>{
+      const c=document.createElement('canvas');c.width=32;c.height=32;
+      const ctx=c.getContext('2d');ctx.drawImage(img,0,0,32,32);
+      const d=ctx.getImageData(0,0,32,32).data;
+      let sat=0,bright=0,n=0;
+      for(let i=0;i<d.length;i+=4){const r=d[i]/255,g=d[i+1]/255,b=d[i+2]/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b);sat+=mx===0?0:(mx-mn)/mx;bright+=(r+g+b)/3;n++;}
+      sat/=n;bright/=n;const rn=()=>Math.random()*.06-.03;
+      res([.50+(1-sat)*.32+rn(),.42+sat*.14+bright*.08+rn(),.38+sat*.22+rn(),.32+rn(),.30+sat*.10+rn()]);
+    };img.src=s;
+  });
+}
+
+const DOMS=['sketch','photo','painting','clipart','art'],EMJ={'sketch':' ','photo':' ','painting':' ','clipart':' ️','art':' ️'};
+
+async function runDemo(){
+  if(!src){toast('먼저 이미지를 업로드해주세요');return;}
+  const btn=document.getElementById('rbtn');btn.classList.add('loading');btn.textContent='Estimating...';
+  const tau = TAU;
+  const sims=await estimateSims(src);
+  const w=softmax(sims,tau);
+  const ti=w.indexOf(Math.max(...w));
+
+  const md=document.getElementById('mdots');md.innerHTML='';
+  const oc=Math.floor(4+Math.random()*9);
+  for(let i=0;i<44;i++){const d=document.createElement('div');d.className='mdot'+(i<oc?' out':'');md.appendChild(d);}
+  document.getElementById('mnote').innerHTML=`<strong>${oc}개</strong> outlier 제거 → robust mode m* 획득`;
+
+  document.getElementById('rhdomain').innerHTML=`${EMJ[DOMS[ti]]} <span class="dem">${DOMS[ti]}</span>`;
+  document.getElementById('rhconf').textContent=`Confidence ${(w[ti]*100).toFixed(0)}% · τ = ${tau.toFixed(2)}`;
+
+  const sorted=w.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v);
+  const bl=document.getElementById('blist');bl.innerHTML='';
+  sorted.forEach(({v,i},rank)=>{
+    const pct=(v*100).toFixed(0),cls=rank===0?'bf1':rank===1?'bf2':'bf3';
+    bl.innerHTML+=`<div class="bitem"><div class="btop"><span class="bname">${EMJ[DOMS[i]]} ${DOMS[i]}</span><span class="bpct">${pct}%</span></div><div class="btrack"><div class="bfill ${cls}" data-w="${v*100}"></div></div></div>`;
+  });
+  document.getElementById('wtxt').innerHTML=`Text embedding에 <strong>${DOMS[ti]}</strong> weight <strong>${(w[ti]*100).toFixed(0)}%</strong> 반영됨`;
+  document.getElementById('rwrap').classList.add('show');
+  setTimeout(()=>{document.querySelectorAll('.bfill').forEach(el=>el.style.width=parseFloat(el.dataset.w).toFixed(1)+'%');},60);
+
+  btn.classList.remove('loading'); btn.style.display='none';
+  toast(`${DOMS[ti]} domain으로 추정 완료`);
+}
+
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2500);}
+
+window.addEventListener('load', () => lucide.createIcons());
