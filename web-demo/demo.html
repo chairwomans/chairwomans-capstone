@@ -27,7 +27,6 @@
 
     <div class="mscroll">
       <div class="mcard">
-        <a href="https://github.com/0euun" style="text-decoration: none; color: inherit;">
         <div class="mcard-top mc1"><div class="avatar av1"><i data-lucide="cat"></i></div></div>
         <div class="mcard-bot">
           <div class="mname">설영은</div>
@@ -37,7 +36,6 @@
         </a>
       </div>
       <div class="mcard">
-        <a href="https://github.com/zziminally" style="text-decoration: none; color: inherit;">
         <div class="mcard-top mc2"><div class="avatar av2"><i data-lucide="dog"></i></div></div>
         <div class="mcard-bot">
           <div class="mname">신지민</div>
@@ -47,22 +45,11 @@
         </a>
       </div>
       <div class="mcard">
-        <a href="https://github.com/HSYoon124" style="text-decoration: none; color: inherit;">
         <div class="mcard-top mc3"><div class="avatar av3"><i data-lucide="panda"></i></div></div>
         <div class="mcard-bot">
           <div class="mname">윤희서</div>
           <div class="mrole">Engineer</div>
           <span class="mtag mt3">Domain Prompt</span>
-        </div>
-        </a>
-      </div>
-      <div class="mcard">
-        <a href="https://github.com/chairwomans/chairwomans-capstone" style="text-decoration: none; color: inherit;">
-        <div class="mcard-top mc4"><div class="avatar av4"><i data-lucide="users-round"></i></div></div>
-        <div class="mcard-bot">
-          <div class="mname">이사장님</div>
-          <div class="mrole">Team1</div>
-          <span class="mtag mt4">Chairwomans</span>
         </div>
         </a>
       </div>
@@ -83,7 +70,7 @@
       </div>
       <div class="ritem">
         <div class="ribox"><i data-lucide="database"></i></div>
-        <div><div class="riname">Dataset</div><div class="ridesc">ImageNet 계열 5종(A/V2/R/Sketch) + 도메인별 10종(SUN397, DTD, EuroSAT, etc.)</div></div>
+        <div><div class="riname">Dataset</div><div class="ridesc">PACS + ImageNet 계열 5종(A/V2/R/Sketch) + 도메인별 10종(SUN397, DTD, EuroSAT, etc.)</div></div>
       </div>
     </div>
   </div>
@@ -128,7 +115,7 @@
       <div class="chips">
         <span class="chip">ImageNet</span><span class="chip">ImageNet-A</span>
         <span class="chip">ImageNet-V2</span><span class="chip">ImageNet-R</span>
-        <span class="chip">ImageNet-Sketch</span>
+        <span class="chip">ImageNet-Sketch</span><span class="chip">PACS</span>
       </div>
       <div class="div"></div>
       <div class="clabel">Datasets · Domain-specific (10)</div>
@@ -310,5 +297,13 @@
 <div class="toast" id="toast"></div>
 
 <script src="./js/main.js"></script>
+<script>
+  document.querySelectorAll('.page').forEach(page => {
+    const foot = document.createElement('div');
+    foot.className = 'page-foot';
+    foot.innerHTML = '<a href="https://github.com/chairwomans/chairwomans-capstone" target="_blank" rel="noopener" class="page-foot-link">© 2026 Team1 이사장님</a>';
+    page.appendChild(foot);
+  });
+</script>
 </body>
 </html>
