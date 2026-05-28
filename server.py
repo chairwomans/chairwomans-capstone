@@ -16,11 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory="web-demo"), name="static")
-
 @app.get("/")
 def root():
     return FileResponse("web-demo/demo.html")
+
+app.mount("/static", StaticFiles(directory="web-demo"), name="static")
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
@@ -42,4 +42,4 @@ async def predict(file: UploadFile = File(...)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("server:app", host="0.0.0.0", port=7860, reload=False)
