@@ -31,7 +31,6 @@ def estimate_domain(
 ) -> dict:
     
     inputs = make_views(image, n_views).to(device)
-
     args = SimpleNamespace(lambda_y=0.2, lambda_q=4)
     mode = solve_mta(model, inputs, args)
 
