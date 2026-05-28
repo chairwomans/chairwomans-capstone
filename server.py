@@ -24,7 +24,6 @@ def root():
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
-    # 이미지 유효성 검사
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="이미지 파일만 업로드 가능합니다.")
 
