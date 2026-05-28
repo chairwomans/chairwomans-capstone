@@ -140,7 +140,7 @@ html,body { width:100%;height:100%;background:var(--bg);font-family:'Pretendard'
 .bitem { margin-bottom:14px; }
 .bitem:last-child { margin-bottom:0; }
 .btop { display:flex;justify-content:space-between;margin-bottom:6px; }
-.bname { font-size:13px;font-weight:600;color:var(--g1); }
+.bname { font-size:13px;font-weight:600;color:var(--g1);display:flex;align-items:center;gap:6px; }
 .bpct { font-size:13px;font-weight:700; }
 .btrack { height:6px;background:var(--bg4);border-radius:99px;overflow:hidden; }
 .bfill { height:100%;border-radius:99px;width:0%;transition:width .8s cubic-bezier(.25,.46,.45,.94); }
