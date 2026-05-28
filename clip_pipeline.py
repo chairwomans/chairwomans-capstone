@@ -5,11 +5,9 @@ import clip
 from domain_prompts import domain_prompts
 from mta import make_views, solve_mta
 
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model, _ = clip.load("ViT-B/32", device=device)
 model.eval()
-
 
 def _build_domain_features():
     features = {}
@@ -25,7 +23,6 @@ def _build_domain_features():
     return domain_features, domain_names
 
 domain_features, domain_names = _build_domain_features()
-
 
 def estimate_domain(
     image: Image.Image,
