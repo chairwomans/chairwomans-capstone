@@ -5,9 +5,10 @@ function goPage(i){pages[cur].classList.remove('active');navs[cur].classList.rem
 
 const TAU = 0.07;
 
-let src=null;
+let src=null, fileObj=null;
 document.getElementById('fileInput').addEventListener('change',e=>{
   const f=e.target.files[0];if(!f)return;
+  fileObj=f;
   const r=new FileReader();r.onload=ev=>{
     src=ev.target.result;
     const img=document.getElementById('prevImg');img.src=src;img.style.display='block';
@@ -35,52 +36,61 @@ function buildCrops(s){
   };img.src=s;
 }
 
-function softmax(arr,tau){const sc=arr.map(v=>v/tau),mx=Math.max(...sc),ex=sc.map(v=>Math.exp(v-mx)),s=ex.reduce((a,b)=>a+b,0);return ex.map(v=>v/s);}
-
-function estimateSims(s){
-  return new Promise(res=>{
-    const img=new Image();img.onload=()=>{
-      const c=document.createElement('canvas');c.width=32;c.height=32;
-      const ctx=c.getContext('2d');ctx.drawImage(img,0,0,32,32);
-      const d=ctx.getImageData(0,0,32,32).data;
-      let sat=0,bright=0,n=0;
-      for(let i=0;i<d.length;i+=4){const r=d[i]/255,g=d[i+1]/255,b=d[i+2]/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b);sat+=mx===0?0:(mx-mn)/mx;bright+=(r+g+b)/3;n++;}
-      sat/=n;bright/=n;const rn=()=>Math.random()*.06-.03;
-      res([.50+(1-sat)*.32+rn(),.42+sat*.14+bright*.08+rn(),.38+sat*.22+rn(),.32+rn(),.30+sat*.10+rn()]);
-    };img.src=s;
-  });
-}
-
-const DOMS=['sketch','photo','painting','clipart','art'],EMJ={'sketch':' ','photo':' ','painting':' ','clipart':' ️','art':' ️'};
+const EMJ = {
+  photo: 'camera', sketch: 'pencil', cartoon: 'smile', drawing: 'pen',
+  graffiti: 'brush', origami: 'bird', sculpture: 'box', sticker: 'tag',
+  tattoo: 'zap', toy: 'gamepad-2', videogame: 'gamepad', deviantart: 'palette',
+  graphic: 'ruler', rendering: 'monitor', embroidery: 'scissors', plastic: 'layers', misc: 'sparkles'
+};
+function domEmj(d){ return `<i data-lucide="${EMJ[d] || 'search'}"></i>`; }
 
 async function runDemo(){
   if(!src){toast('먼저 이미지를 업로드해주세요');return;}
+  if(!fileObj){toast('파일을 다시 선택해주세요');return;}
   const btn=document.getElementById('rbtn');btn.classList.add('loading');btn.textContent='Estimating...';
-  const tau = TAU;
-  const sims=await estimateSims(src);
-  const w=softmax(sims,tau);
-  const ti=w.indexOf(Math.max(...w));
 
+  let data;
+  try {
+    const form = new FormData();
+    form.append('file', fileObj);
+    const resp = await fetch('/predict', {method:'POST', body:form});
+    if(!resp.ok){
+      const err = await resp.text();
+      throw new Error(`서버 오류 ${resp.status}: ${err}`);
+    }
+    data = await resp.json();
+  } catch(e) {
+    toast('❌ ' + e.message);
+    btn.classList.remove('loading'); btn.textContent='Domain Estimation 실행';
+    return;
+  }
+
+  // weights: {domain: weight, ...} — already sorted by server
+  const entries = Object.entries(data.weights); // [[name, val], ...]
+  const topDomain = data.predicted_domain;
+  const topWeight = data.weights[topDomain];
+
+  // MTA 시각화 (outlier 수는 서버가 알 수 없으므로 랜덤 연출 유지)
   const md=document.getElementById('mdots');md.innerHTML='';
   const oc=Math.floor(4+Math.random()*9);
   for(let i=0;i<44;i++){const d=document.createElement('div');d.className='mdot'+(i<oc?' out':'');md.appendChild(d);}
   document.getElementById('mnote').innerHTML=`<strong>${oc}개</strong> outlier 제거 → robust mode m* 획득`;
 
-  document.getElementById('rhdomain').innerHTML=`${EMJ[DOMS[ti]]} <span class="dem">${DOMS[ti]}</span>`;
-  document.getElementById('rhconf').textContent=`Confidence ${(w[ti]*100).toFixed(0)}% · τ = ${tau.toFixed(2)}`;
+  document.getElementById('rhdomain').innerHTML=`${domEmj(topDomain)} <span class="dem">${topDomain}</span>`;
+  document.getElementById('rhconf').textContent=`Confidence ${(topWeight*100).toFixed(0)}%`;
 
-  const sorted=w.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v);
   const bl=document.getElementById('blist');bl.innerHTML='';
-  sorted.forEach(({v,i},rank)=>{
-    const pct=(v*100).toFixed(0),cls=rank===0?'bf1':rank===1?'bf2':'bf3';
-    bl.innerHTML+=`<div class="bitem"><div class="btop"><span class="bname">${EMJ[DOMS[i]]} ${DOMS[i]}</span><span class="bpct">${pct}%</span></div><div class="btrack"><div class="bfill ${cls}" data-w="${v*100}"></div></div></div>`;
+  entries.forEach(([name, val], rank)=>{
+    const pct=(val*100).toFixed(0), cls=rank===0?'bf1':rank===1?'bf2':'bf3';
+    bl.innerHTML+=`<div class="bitem"><div class="btop"><span class="bname">${domEmj(name)} ${name}</span><span class="bpct">${pct}%</span></div><div class="btrack"><div class="bfill ${cls}" data-w="${val*100}"></div></div></div>`;
   });
-  document.getElementById('wtxt').innerHTML=`Text embedding에 <strong>${DOMS[ti]}</strong> weight <strong>${(w[ti]*100).toFixed(0)}%</strong> 반영됨`;
+  document.getElementById('wtxt').innerHTML=`Text embedding에 <strong>${topDomain}</strong> weight <strong>${(topWeight*100).toFixed(0)}%</strong> 반영됨`;
   document.getElementById('rwrap').classList.add('show');
+  lucide.createIcons();
   setTimeout(()=>{document.querySelectorAll('.bfill').forEach(el=>el.style.width=parseFloat(el.dataset.w).toFixed(1)+'%');},60);
 
   btn.classList.remove('loading'); btn.style.display='none';
-  toast(`${DOMS[ti]} domain으로 추정 완료`);
+  toast(`✅ ${topDomain} domain으로 추정 완료`);
 }
 
 let toastT;
