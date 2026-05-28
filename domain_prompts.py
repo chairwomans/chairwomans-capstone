@@ -107,5 +107,5 @@ domain_prompts = {
         "a plastic figure",
         "a shiny plastic object",
         "a molded plastic toy",
-    ],
+    ]
 }
