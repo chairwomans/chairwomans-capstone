@@ -37,12 +37,12 @@ function buildCrops(s){
 }
 
 const EMJ = {
-  photo: '📷', sketch: '✏️', cartoon: '🎨', drawing: '🖊️',
-  graffiti: '🖌️', origami: '🦢', sculpture: '🗿', sticker: '🏷️',
-  tattoo: '💉', toy: '🧸', videogame: '🎮', deviantart: '🖼️',
-  graphic: '📐', rendering: '🖥️', embroidery: '🧵', plastic: '🧩', misc: '🎭'
+  photo: 'camera', sketch: 'pencil', cartoon: 'smile', drawing: 'pen',
+  graffiti: 'brush', origami: 'bird', sculpture: 'box', sticker: 'tag',
+  tattoo: 'zap', toy: 'gamepad-2', videogame: 'gamepad', deviantart: 'palette',
+  graphic: 'ruler', rendering: 'monitor', embroidery: 'scissors', plastic: 'layers', misc: 'sparkles'
 };
-function domEmj(d){ return EMJ[d] || '🔍'; }
+function domEmj(d){ return `<i data-lucide="${EMJ[d] || 'search'}"></i>`; }
 
 async function runDemo(){
   if(!src){toast('먼저 이미지를 업로드해주세요');return;}
@@ -86,6 +86,7 @@ async function runDemo(){
   });
   document.getElementById('wtxt').innerHTML=`Text embedding에 <strong>${topDomain}</strong> weight <strong>${(topWeight*100).toFixed(0)}%</strong> 반영됨`;
   document.getElementById('rwrap').classList.add('show');
+  lucide.createIcons();
   setTimeout(()=>{document.querySelectorAll('.bfill').forEach(el=>el.style.width=parseFloat(el.dataset.w).toFixed(1)+'%');},60);
 
   btn.classList.remove('loading'); btn.style.display='none';
