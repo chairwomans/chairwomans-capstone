@@ -1,11 +1,21 @@
+---
+title: start-demo
+emoji: 🔍
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+---
+
 # 이사장님
 
 ## Team
-| Name | Github |
-|-----|-----|
-| 설영은 | [@0euun](https://github.com/0euun) |
+
+| Name   | Github                                       |
+| ------ | -------------------------------------------- |
+| 설영은 | [@0euun](https://github.com/0euun)           |
 | 신지민 | [@zziminally](https://github.com/zziminally) |
-| 윤희서 | [@HSYoon124](https://github.com/HSYoon124) |
+| 윤희서 | [@HSYoon124](https://github.com/HSYoon124)   |
 
 ## Summary
 
@@ -38,8 +48,8 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 
 테스트 이미지가 들어오면 다음 세 가지를 순서대로 수행한다.
 
-1. **Augmentation**: 원본 이미지 1장으로부터 Stable Diffusion V2(63장)와 RandomCrop(64장)을 통해 총 128장의 augmented view를 생성하고, MeanShift 기반 MTA로 outlier를 제거해 robust한 이미지 임베딩 m*를 획득한다.
-2. **도메인 자동 추정**: m*와 도메인 프롬프트 임베딩 간 코사인 유사도를 계산해 "이 이미지가 어떤 도메인인지"를 확률적으로 추정한다.
+1. **Augmentation**: 원본 이미지 1장으로부터 Stable Diffusion V2(63장)와 RandomCrop(64장)을 통해 총 128장의 augmented view를 생성하고, MeanShift 기반 MTA로 outlier를 제거해 robust한 이미지 임베딩 m\*를 획득한다.
+2. **도메인 자동 추정**: m\*와 도메인 프롬프트 임베딩 간 코사인 유사도를 계산해 "이 이미지가 어떤 도메인인지"를 확률적으로 추정한다.
 3. **동적 임베딩 재조합**: 추정된 도메인 가중치를 텍스트 임베딩과 이미지 임베딩 **양쪽에 동시에** 적용해, 해당 도메인에 최적화된 비교 기준을 실시간으로 생성한다.
 
 <br>
@@ -107,36 +117,37 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 
 ### 데이터셋
 
-| 구분 | 데이터셋 | 설명 |
-|------|----------|------|
-| Domain Shift 측정 (5종) | ImageNet | 일반 실사 이미지 (기준) |
-| | ImageNet-A | 자연 adversarial 이미지 |
-| | ImageNet-V2 | ImageNet 재수집 버전 |
-| | ImageNet-R | 회화·만화·스케치 등 렌더링 이미지 |
-| | ImageNet-Sketch | 순수 스케치 도메인 이미지 |
-| 특정 도메인 분류 (10종) | Aircraft, EuroSAT, StanfordCars, Food101 | 항공기·위성·자동차·음식 |
-| | OxfordPets, Flower102, Caltech101, DTD, UCF101, SUN397 | 반려동물·꽃·객체·질감·행동·장면 |
+| 구분                    | 데이터셋                                               | 설명                              |
+| ----------------------- | ------------------------------------------------------ | --------------------------------- |
+| Domain Shift 측정 (5종) | ImageNet                                               | 일반 실사 이미지 (기준)           |
+|                         | ImageNet-A                                             | 자연 adversarial 이미지           |
+|                         | ImageNet-V2                                            | ImageNet 재수집 버전              |
+|                         | ImageNet-R                                             | 회화·만화·스케치 등 렌더링 이미지 |
+|                         | ImageNet-Sketch                                        | 순수 스케치 도메인 이미지         |
+| 특정 도메인 분류 (10종) | Aircraft, EuroSAT, StanfordCars, Food101               | 항공기·위성·자동차·음식           |
+|                         | OxfordPets, Flower102, Caltech101, DTD, UCF101, SUN397 | 반려동물·꽃·객체·질감·행동·장면   |
 
 ### 비교 대상 (Baseline)
-| 모델 | 방식 | 비교 목적 |
-|------|------|-----------|
+
+| 모델               | 방식                                           | 비교 목적                                            |
+| ------------------ | ---------------------------------------------- | ---------------------------------------------------- |
 | **CLIP Zero-Shot** | 고정 평균 프롬프트 앙상블, 아무 적응 없이 분류 | 순수 베이스라인 — 우리 방법이 얼마나 개선되는지 측정 |
-| **TPT** | 테스트 시점에 프롬프트를 동적으로 튜닝 | 동일한 Test-Time Adaptation 설정에서의 직접 비교 |
-| **MTA (단독)** | 도메인 추정 없이 MeanShift TTA만 적용 | 도메인 가중 재조합의 실질적 기여도 측정 |
-| **MaPLe** | 멀티모달 프롬프트를 학습 데이터로 사전 학습 | 학습 기반 방법 대비 성능 상한선 참고용 |
+| **TPT**            | 테스트 시점에 프롬프트를 동적으로 튜닝         | 동일한 Test-Time Adaptation 설정에서의 직접 비교     |
+| **MTA (단독)**     | 도메인 추정 없이 MeanShift TTA만 적용          | 도메인 가중 재조합의 실질적 기여도 측정              |
+| **MaPLe**          | 멀티모달 프롬프트를 학습 데이터로 사전 학습    | 학습 기반 방법 대비 성능 상한선 참고용               |
 
 ### 데모 실험 (MTA 베이스라인)
- 
+
 MTA 단독 성능을 확인하기 위해 ImageNet-A 데이터셋 500개 샘플로 batch size별 예비 실험을 진행했다.
- 
-| Batch Size | Acc@1 | Acc@5 |
-|------------|-------|-------|
-| 16 | 55.00% | 79.40% |
-| 32 | 54.80% | 78.40% |
-| 64 | 56.40% | 78.60% |
- 
+
+| Batch Size | Acc@1  | Acc@5  |
+| ---------- | ------ | ------ |
+| 16         | 55.00% | 79.40% |
+| 32         | 54.80% | 78.40% |
+| 64         | 56.40% | 78.60% |
+
 > 실험 환경: Google Colab (GPU T4), ImageNet-A 500 샘플 subset, seed=1, ViT-B/16
- 
+
 데모 코드는 [`MTA_test.ipynb`](https://github.com/chairwomans/chairwomans-capstone/blob/main/MTA_test.ipynb)에서 확인할 수 있다.
 
 <br>
@@ -153,14 +164,14 @@ MTA 단독 성능을 확인하기 위해 ImageNet-A 데이터셋 500개 샘플�
 
 ## 8. 참고 자료
 
-| 자료 | 링크 |
-|------|------|
-| CLIP | https://github.com/openai/CLIP |
-| DiffTPT | https://github.com/chunmeifeng/DiffTPT |
-| MaPLe | https://github.com/muzairkhattak/multimodal-prompt-learning |
-| MTA | https://github.com/MaxZanella/MTA |
+| 자료    | 링크                                                        |
+| ------- | ----------------------------------------------------------- |
+| CLIP    | https://github.com/openai/CLIP                              |
+| DiffTPT | https://github.com/chunmeifeng/DiffTPT                      |
+| MaPLe   | https://github.com/muzairkhattak/multimodal-prompt-learning |
+| MTA     | https://github.com/MaxZanella/MTA                           |
 
-- Radford et al., *Learning Transferable Visual Models From Natural Language Supervision* (CLIP), ICML 2021
-- Khattak et al., *MaPLe: Multi-Modal Prompt Learning*, CVPR 2023
-- Zanella et al., *On the Test-Time Zero-Shot Generalization of Vision-Language Models: Do We Really Need Prompt Learning?*, CVPR 2024
+- Radford et al., _Learning Transferable Visual Models From Natural Language Supervision_ (CLIP), ICML 2021
+- Khattak et al., _MaPLe: Multi-Modal Prompt Learning_, CVPR 2023
+- Zanella et al., _On the Test-Time Zero-Shot Generalization of Vision-Language Models: Do We Really Need Prompt Learning?_, CVPR 2024
 - 추후 업데이트 예정
