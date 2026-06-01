@@ -20,6 +20,7 @@
 
 ---
 
+
 ## 1. 문제 제기
 
 CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함께 이해하는 멀티모달 Vision-Language Model(VLM)이다.
@@ -32,6 +33,8 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 | **고정된 클래스 대표 벡터** | 기존 CLIP은 "고양이 사진", "고양이 스케치" 등 여러 텍스트 프롬프트를 평균 내어 클래스 대표 벡터를 미리 만들어 고정 |
 | **Domain Shift에 취약** | 스케치·회화·위성사진 등 도메인이 달라져도 항상 똑같은 평균 벡터로 비교하기 때문에 도메인이 달라지는 순간 이미지-텍스트 정렬이 어긋나 분류 성능 급락 |
 | **기존 DA의 한계** | 기존 방식은 새로운 도메인마다 추가 데이터를 모아 fine-tuning해야 해서 비효율적이고, 성능 향상도 제한적 |
+
+<br>
 
 ## 2. 제안 방법
 
@@ -48,6 +51,8 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 * **자율주행**: 날씨, 조도, 시간대 변화 등 도로 위 급격한 Domain Shift 상황에 실시간 대응
 * **스마트팩토리**: 제조 공정 내 조명이나 카메라 교체 시 발생하는 주기적인 재학습 비용 절감
 * **게임 및 디자인 콘텐츠**: 실사, 카툰, 픽셀, 스케치 등 수많은 아트 스타일이 혼재된 이미지 데이터 분류 효율화
+
+<br>
 
 ## 3. 전체 파이프라인
 
@@ -91,7 +96,22 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 최종 클래스 분류
 ```
 
-## 4. 차별성
+<br>
+
+## 4. 기술 스택
+ 
+| 분류 | 스택 |
+|------|------|
+| 언어 | ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white) |
+| 모델 | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white) ![CLIP](https://img.shields.io/badge/CLIP-ViT--B/32-412991?logo=openai&logoColor=white) |
+| 증강 | ![Stable Diffusion](https://img.shields.io/badge/Stable_Diffusion-V2-blueviolet) ![torchvision](https://img.shields.io/badge/torchvision-RandomResizedCrop-EE4C2C) |
+| 백엔드 | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white) ![Uvicorn](https://img.shields.io/badge/Uvicorn-lightgrey) |
+| 배포 | ![HuggingFace](https://img.shields.io/badge/HuggingFace_Spaces-FFD21E?logo=huggingface&logoColor=black) ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) |
+| 실험 환경 | ![Colab](https://img.shields.io/badge/Google_Colab-F9AB00?logo=googlecolab&logoColor=black) GPU T4 |
+
+<br>
+
+## 5. 차별성
 
 | 구분 | 기존 CLIP | TPT (NeurIPS 2022)  | DiffTPT (ICCV 2023)  | 본 연구 (Ours) |
 | --- | --- | --- | --- | --- |
@@ -101,7 +121,9 @@ Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재�
 | 도메인 인식 | - | - | - | **명시적 추정 후 가중치 반영** |
 | 추가 학습 | 불필요 | 필요 (역전파) | 필요 (역전파) | **불필요** **(training-free)** |
 
-## 5. 실험
+<br>
+
+## 6. 실험
 
 ### 데이터셋
 
@@ -159,13 +181,15 @@ PACS 검증 예시 (정답: sketch)
 
 이후 도메인을 18개로 확장. 확장된 도메인은 domain_prompts.py 참고.
 
----
+<br>
 
-## 6. 빠른 시작
+## 7. 빠른 시작
 
 [self_demo.md](https://github.com/chairwomans/chairwomans-capstone/blob/main/self_demo.md)에서 자세한 내용 확인 가능
 
 [데모 시연 참고 영상](https://www.youtube.com/watch?v=FWY20-wg71c)
+
+발표 슬라이드: `docs/` 폴더에 업로드 예정
 
 ### 방법 1. 웹 데모 (권장, 설치 불필요)
 
@@ -199,9 +223,11 @@ uvicorn server:app --reload   # 서버 실행
 ```
 
 > ‘방법 1. 웹 데모’를 로컬에서 실행하는 방법입니다. 로컬에서 실행하기 위하여 Python 버전을 3.12.4로 맞추시는 것을 추천드립니다.
-> 
+>
 
-## 7. 레포지토리 구조
+<br>
+
+## 8. 레포지토리 구조
 
 ```
 chairwomans-capstone/
@@ -238,6 +264,7 @@ chairwomans-capstone/
 ├── .gitignore                       # 특정 파일, 폴더 추적 무시
 ├── Demo.ipynb                       # 메인 데모 노트북 (Google Colab에서 실행 가능)
 ├── Dockerfile                       # HuggingFace Spaces 컨테이너 배포용
+├── LICENSE                          # LICENSE
 ├── README.md                        # 프로젝트 소개 README.md
 ├── clip_pipeline.py                 # 전체 추론 파이프라인 진입점
 ├── domain_prompts.py                # 18개 도메인별 텍스트 프롬프트 딕셔너리
@@ -247,7 +274,9 @@ chairwomans-capstone/
 └── server.py                        # FastAPI 기반 웹 데모 백엔드
 ```
 
-## 8. 참고 자료
+<br>
+
+## 9. 참고 자료
 
 | 자료 | 링크 |
 | --- | --- |
@@ -264,3 +293,9 @@ chairwomans-capstone/
 - Feng et al., *Diverse Data Augmentation with Diffusions for Effective Test-time Prompt Tuning*, ICCV 2023
 - Zanella et al., *On the Test-Time Zero-Shot Generalization of Vision-Language Models: Do We Really Need Prompt Learning?*, CVPR 2024
 - 추후 실험 진행하면서 추가 예정
+
+<br>
+
+## 10. 라이선스
+ 
+This project is licensed under the MIT License.
