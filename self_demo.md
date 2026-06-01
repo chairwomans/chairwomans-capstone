@@ -38,9 +38,9 @@ https://youtu.be/sDcYX7JR1cE?si=S3NCtRG_jljmAxKt
 링크: https://chairwomans-start-demo.hf.space/
 
 Demo 페이지(테스트 전, 테스트 후)를 제외한 나머지 페이지들은 연구 이해도를 위한 참고용입니다. 
-| 팀원 | 프로젝트 | 파이프라인 | 테스트 전 | 테스트 후 | 향후 계획 |
+| Team | Project | Method | Demo(테스트 전) | Demo(테스트 후) | 향후 계획 |
 |------|---------|-----------|-----------|-----------|---------|
-| <img width="424" height="930" alt="image" src="https://github.com/user-attachments/assets/228dd76a-8d41-4eb1-a76d-ac4c7cf4c6ce" /> | <img width="425" height="926" alt="image" src="https://github.com/user-attachments/assets/b25ae2f5-9b66-456d-a79c-bcdb381c3b54" /> | <img width="420" height="927" alt="image" src="https://github.com/user-attachments/assets/7654b3ed-6b5c-44bc-a32a-404b7189f4bb" /> | <img width="422" height="929" alt="image" src="https://github.com/user-attachments/assets/61e106b2-037d-4daa-81dd-7ee6e33d0b01" /> | <img width="424" height="926" alt="image" src="https://github.com/user-attachments/assets/995ef6e5-f5d2-4bd6-aa11-2d988fef22f4" /> | <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/550cb9ad-7dc3-407e-89c6-d9eb49570246" /> |
+| <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/228dd76a-8d41-4eb1-a76d-ac4c7cf4c6ce" /> | <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/b25ae2f5-9b66-456d-a79c-bcdb381c3b54" /> | <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/7654b3ed-6b5c-44bc-a32a-404b7189f4bb" /> | <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/61e106b2-037d-4daa-81dd-7ee6e33d0b01" /> | <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/995ef6e5-f5d2-4bd6-aa11-2d988fef22f4" /> | <img width="424" height="928" alt="image" src="https://github.com/user-attachments/assets/550cb9ad-7dc3-407e-89c6-d9eb49570246" /> |
 
 ### [Team]
 
@@ -66,11 +66,26 @@ Demo 페이지(테스트 전, 테스트 후)를 제외한 나머지 페이지들
 
 - 실행 방법
     1. 원하는 이미지 업로드
+       
+       <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/c9c03522-888f-4a3c-9ea4-f40bb6ca9c2f" />
+
     2. RandomCrop 결과 출력
-    3. 'Domain Estimation 실행' 버튼 클릭
-    4. 몇 초 후 도메인 추정 결과 출력
+ 
+       <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/4c9225c9-a1cb-4e10-a288-b46250eb679a" />
+
+    4. 'Domain Estimation 실행' 버튼 클릭
+ 
+       <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/10397a11-cf5c-4e9c-b9f7-f40aa56e6e56" />
+
+    6. 몇 초 후 도메인 추정 결과 출력
         - MTA 실행 결과 (outlier 제거 수 확인)
+      
+          <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/6f76e8dd-7d82-4dc9-9d04-049daa06556a" />
+
         - 추정된 도메인 결과 (추정된 상위 5개 도메인 확인 가능)
+      
+          <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/3b9e74fb-949f-4afb-862b-4b3774f633da" />
+
 
 ### [Next]
 
