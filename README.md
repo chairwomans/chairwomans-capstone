@@ -59,6 +59,7 @@ CLIP(Contrastive Language–Image Pre-training)은 이미지와 텍스트를 함
 전체 파이프라인은 **사전 단계**와 **테스트 단계**로 구성된다.
 
 ### 사전 단계 (Pre-processing)
+<img width="612" height="205" alt="image" src="https://github.com/user-attachments/assets/be9c92d4-43b8-49ca-9268-fdcfac06029a" />
 
 ```
 도메인별 텍스트 프롬프트 구성
@@ -71,6 +72,7 @@ CLIP 기본 템플릿 확인 (26개 데이터셋 기반)
 ```
 
 ### 테스트 단계 (Test-Time)
+<img width="606" height="543" alt="image" src="https://github.com/user-attachments/assets/dbb0ae1f-dc5c-4cd2-b335-5e99ea09504e" />
 
 **지원 도메인 (18종)**
 
