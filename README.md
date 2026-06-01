@@ -1,4 +1,5 @@
 # 이사장님
+서비스명: DoFit
 
 ## 팀원 소개
 
@@ -7,6 +8,8 @@
 | 설영은 | [@0euun](https://github.com/0euun) | 총괄 · 실험 설계 · 알고리즘 리드 |
 | 신지민 | [@zziminally](https://github.com/zziminally) | 모델 구현 · 인프라 · 알고리즘 구현 |
 | 윤희서 | [@HSYoon124](https://github.com/HSYoon124) | 데이터 · 평가 · 프롬프트 설계 |
+
+지도교수: 황의원 교수님 | 이화여자대학교
 
 ## 한 줄 요약
 
@@ -233,12 +236,12 @@ chairwomans-capstone/
 ├── clip_pipeline.py                 # 전체 추론 파이프라인 진입점
 ├── domain_prompts.py                # 18개 도메인별 텍스트 프롬프트 딕셔너리
 ├── mta.py                           # MeanShift 기반 MTA (Test-Time Augmentation) 구현
-├── requirements.txt                 # 의존성 목록
+├── requirements.txt                 # 의존성 목록 (필요한 라이브러리 명시)
 ├── self_demo.md                     # Self-Demo 실행 가이드
 └── server.py                        # FastAPI 기반 웹 데모 백엔드
 ```
 
-## 8. 참고 문헌
+## 8. 참고 자료
 
 | 자료 | 링크 |
 | --- | --- |
@@ -246,6 +249,9 @@ chairwomans-capstone/
 | MTA | [MaxZanella/MTA](https://github.com/MaxZanella/MTA) |
 | DiffTPT | [chunmeifeng/DiffTPT](https://github.com/chunmeifeng/DiffTPT) |
 | MaPLe | [muzairkhattak/multimodal-prompt-learning](https://github.com/muzairkhattak/multimodal-prompt-learning) |
+| ImageNet | [ImageNet](https://www.image-net.org) |
+| PACS | [PACS](https://huggingface.co/datasets/flwrlabs/pacs) |
+| HuggingFace | [HuggingFace](https://huggingface.co/) |
 - Radford et al., *Learning Transferable Visual Models From Natural Language Supervision*, ICML 2021
 - Shu et al., *Test-Time Prompt Tuning for Zero-Shot Generalization in Vision-Language Models*, NeurIPS 2022
 - Khattak et al., *MaPLe: Multi-Modal Prompt Learning*, CVPR 2023
