@@ -17,4 +17,4 @@
 | 기대 효과 | 본 연구를 통해 다음과 같은 효과를 기대한다.<br><br>- **Domain Shift 강건성 향상**: 스케치, 회화, 위성사진 등 다양한 도메인 변화 환경에서도 CLIP 기반 Zero-Shot 분류 정확도를 개선한다.<br>- **Training-Free 적응**: 역전파(역전파 기반 프롬프트 튜닝인 TPT 대비) 없이 테스트 시점에서만 동작하므로, 추가 학습 데이터나 GPU 학습 비용 없이 새로운 도메인에 즉시 적용 가능하다.<br>- **텍스트·이미지 임베딩 동시 적응**: 기존 연구들이 텍스트 임베딩만 조정하는 것과 달리, 텍스트와 이미지 임베딩 양쪽을 동일한 도메인 가중치로 동시에 재조합함으로써 이미지-텍스트 정렬 품질을 높인다.<br>- **방법론 확장 가능성**: 제안하는 test-time domain adaptation 방법론은 멀티모달 모델의 domain shift 문제를 다루는 다양한 downstream task로 확장될 수 있으며, 데이터 확보가 어려운 특수 도메인(의료, 위성, 산업용 이미지 등)에서의 멀티모달 AI 활용 가능성을 확대할 것으로 기대된다. |
 | GitHub Repo | [https://github.com/chairwomans/chairwomans-capstone](https://github.com/chairwomans/chairwomans-capstone) |
 | Team Ground Rule | [Team Ground Rule](https://github.com/chairwomans/chairwomans-capstone/blob/main/docs/Team_Ground_Rule.md) |
-| 최종수정일 | 2026-06-01 |
+| 최종수정일 | 2026-06-02 |
