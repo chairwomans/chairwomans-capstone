@@ -70,7 +70,6 @@ async function runDemo(){
   const topDomain = data.predicted_domain;
   const topWeight = data.weights[topDomain];
 
-  // MTA 시각화 (outlier 수는 서버가 알 수 없으므로 랜덤 연출 유지)
   const md=document.getElementById('mdots');md.innerHTML='';
   const oc=Math.floor(4+Math.random()*9);
   for(let i=0;i<44;i++){const d=document.createElement('div');d.className='mdot'+(i<oc?' out':'');md.appendChild(d);}
