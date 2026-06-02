@@ -69,12 +69,13 @@ CLIP 기본 템플릿 확인 (26개 데이터셋 기반)
    ↓
 최종 프롬프트 확정 → 도메인 프롬프트 임베딩 사전 계산
 ```
+최종 확정된 프롬프트: [domain_prompts.py](https://github.com/chairwomans/chairwomans-capstone/blob/main/domain_prompts.py)
 
 ### 테스트 단계 (Test-Time)
 
-**지원 도메인 (18종)**
+**지원 도메인 (17종)**
 
-`photo` `sketch` `cartoon` `rendering` `painting` `sculpture` `origami` `tattoo` `graffiti` `deviantart` `embroidery` `graphic` `sticker` `toy` `videogame` `drawing` `plastic` `misc`
+`photo` `cartoon` `deviantart` `embroidery` `graffiti` `graphic` `misc` `origami` `sculpture` `sketch` `sticker` `tattoo` `toy` `videogame` `drawing` `rendering` `plastic`
 
 ```
 테스트 이미지 1장 입력
@@ -85,19 +86,22 @@ CLIP Visual Encoder — 128장 각각 임베딩 벡터 추출
 ↓
 MTA (MeanShift-based TTA) — outlier view 자동 제거 → robust한 이미지 임베딩 m* 획득
 ↓
-도메인 추정 — m*와 도메인 프롬프트 임베딩 간 코사인 유사도 → Softmax (τ=0.07) → 도메인 가중치
+도메인 추정 — m*와 도메인 프롬프트 임베딩 간 코사인 유사도 → Softmax → 도메인 가중치
 ↓ (동일한 도메인 가중치 적용)
-↓                                    ↓
-이미지 임베딩                       텍스트 임베딩
-Linear Projection (768d → 512d)     클래스별 템플릿 가중 평균 재조합 → 클래스 대표 벡터
-↓                                    ↓
-↓──────── 코사인 유사도 계산 ─────────↓
+↓                                         ↓
+이미지 임베딩                            텍스트 임베딩
+원본 이미지 + hint token (도메인 가중치   클래스별 템플릿 가중 평균 재조합
+기반 prefix token) → ViT 재처리          → 클래스 대표 벡터
+→ v* (768d)
+→ Linear Projection (768d → 512d)
+↓                                         ↓
+↓──────────── 코사인 유사도 계산 ──────────↓
 ↓
 최종 클래스 분류
 ```
 
 ### 아키텍처 시각화
-<img width="670" height="769" alt="image" src="https://github.com/user-attachments/assets/66c4ec29-e940-4334-99a4-0d5808af18ed" />
+<img width="626" height="840" alt="image" src="https://github.com/user-attachments/assets/8b6c60d8-7b3c-4da5-b018-8f5aac11f942" />
 
 
 <br>
@@ -183,7 +187,7 @@ PACS 검증 예시 (정답: sketch)
   sketch: 0.7065 / cartoon: 0.2480 / art_painting: 0.0278 / photo: 0.0177
 ```
 
-이후 도메인을 18개로 확장. 확장된 도메인은 domain_prompts.py 참고.
+이후 도메인을 17개로 확장. 확장된 도메인은 [domain_prompts.py](https://github.com/chairwomans/chairwomans-capstone/blob/main/domain_prompts.py) 참고.
 
 <br>
 
@@ -271,7 +275,7 @@ chairwomans-capstone/
 ├── LICENSE                          # LICENSE
 ├── README.md                        # 프로젝트 소개 README.md
 ├── clip_pipeline.py                 # 전체 추론 파이프라인 진입점
-├── domain_prompts.py                # 18개 도메인별 텍스트 프롬프트 딕셔너리
+├── domain_prompts.py                # 17개 도메인별 텍스트 프롬프트 딕셔너리
 ├── mta.py                           # MeanShift 기반 MTA (Test-Time Augmentation) 구현
 ├── requirements.txt                 # 의존성 목록 (필요한 라이브러리 명시)
 ├── self_demo.md                     # Self-Demo 실행 가이드
