@@ -255,6 +255,7 @@ chairwomans-capstone/
 │   ├── MTA_mode.ipynb               #   MTA solve_mta() 수렴 과정 및 mode 시각화 실험
 │   └── research.md                  #   어느 파일 있는지 요약
 ├── docs/                            # 프로젝트 문서 폴더
+│   ├── 01_이사장님_기말발표자료.pdf  #   스타트 기말 발표자료
 │   ├── Ideation.md                  #   연구 배경, 아이디어 도출 과정, 핵심 가설
 │   ├── Related_work.md              #   TPT·MaPLe·MTA 논문 분석 및 본 연구와의 차별점 정리
 │   ├── Team_Ground_Rule.md          #   팀 협업 규칙 (소통·회의·PR 규약)
