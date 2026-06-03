@@ -29,7 +29,7 @@
 ### 데모 영상 시청
 
 막히는 부분이 있을 때 영상을 참고하세요. 영상은 **자막(또는 나레이션)** 포함하고 있습니다.
-https://www.youtube.com/watch?v=FWY20-wg71c
+[영상 바로가기](https://youtu.be/d4p3Ho3ruK0?si=gvW_fdELrGFyFrgu)
 
 ---
 
