@@ -193,10 +193,8 @@ PACS 검증 예시 (정답: sketch)
 
 ## 7. 빠른 시작
 
-[self_demo.md](https://github.com/chairwomans/chairwomans-capstone/blob/main/self_demo.md)에서 자세한 내용 확인 가능
-
-[데모 시연 참고 영상](https://www.youtube.com/watch?v=FWY20-wg71c)
-
+[self_demo.md](https://github.com/chairwomans/chairwomans-capstone/blob/main/self_demo.md)에서 자세한 내용 확인 가능 | 
+[데모 시연 참고 영상](https://youtu.be/d4p3Ho3ruK0?si=gvW_fdELrGFyFrgu) | 
 발표 슬라이드: `docs/` 폴더에 업로드 예정
 
 ### 방법 1. 웹 데모 (권장, 설치 불필요)
