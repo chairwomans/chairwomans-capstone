@@ -9,7 +9,8 @@
 | 신지민 | [@zziminally](https://github.com/zziminally) | 모델 구현 · 인프라 · 알고리즘 구현 |
 | 윤희서 | [@HSYoon124](https://github.com/HSYoon124) | 데이터 · 평가 · 프롬프트 설계 |
 
-지도교수: 황의원 교수님 | 이화여자대학교
+- 지도교수: 황의원 교수님 | 이화여자대학교
+- 트랙: 연구트랙
 
 ## 한 줄 요약
 
