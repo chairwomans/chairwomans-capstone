@@ -196,7 +196,7 @@ PACS 검증 예시 (정답: sketch)
 
 [self_demo.md](https://github.com/chairwomans/chairwomans-capstone/blob/main/self_demo.md)에서 자세한 내용 확인 가능 | 
 [데모 시연 참고 영상](https://youtu.be/d4p3Ho3ruK0?si=gvW_fdELrGFyFrgu) | 
-[스타트 기말 발표 슬라이드](https://github.com/chairwomans/chairwomans-capstone/blob/main/docs/01_%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A1%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%82%E1%85%B5%E1%86%B7_%E1%84%80%E1%85%B5%E1%84%86%E1%85%A1%E1%86%AF%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pdf)
+[스타트 기말 발표 슬라이드](https://github.com/chairwomans/chairwomans-capstone/blob/main/docs/01_%EC%9D%B4%EC%82%AC%EC%9E%A5%EB%8B%98_%EA%B8%B0%EB%A7%90%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C%EC%B5%9C%EC%A2%85.pdf)
 
 ### 방법 1. 웹 데모 (권장, 설치 불필요)
 
