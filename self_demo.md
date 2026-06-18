@@ -73,12 +73,12 @@ Demo 페이지(테스트 전, 테스트 후)를 제외한 나머지 페이지들
  
        <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/4c9225c9-a1cb-4e10-a288-b46250eb679a" />
 
-    4. 'Domain Estimation 실행' 버튼 클릭
+    3. 'Domain Estimation 실행' 버튼 클릭
  
        <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/10397a11-cf5c-4e9c-b9f7-f40aa56e6e56" />
 
-    6. 몇 초 후 도메인 추정 결과 출력
-        - MTA 실행 결과 (outlier 제거 수 확인)
+    4. 몇 초 후 도메인 추정 결과 출력
+        - MTA 실행 결과 (inlierness 기반 robust mode m* 계산 확인)
       
           <img width="92" height="201" alt="image" src="https://github.com/user-attachments/assets/6f76e8dd-7d82-4dc9-9d04-049daa06556a" />
 
@@ -161,7 +161,7 @@ model.eval()
 ### 4. 도메인 프롬프트 정의 셀 실행
 
 - `domain_prompts` 딕셔너리 정의
-- 총 18개 도메인: `photo`, `sketch`, `cartoon`, `rendering`, `painting`, `sculpture`, `origami`, `tattoo`, `graffiti`, `deviantart`, `embroidery`, `graphic`, `sticker`, `toy`, `videogame`, `drawing`, `plastic`, `misc`
+- 총 17개 도메인: `photo`, `cartoon`, `deviantart`, `embroidery`, `graffiti`, `graphic`, `misc`, `origami`, `sculpture`, `sketch`, `sticker`, `tattoo`, `toy`, `videogame`, `drawing`, `rendering`, `plastic`
 - 출력 없음 — 정상입니다
 
 ### 5. 도메인 프롬프트 임베딩 생성 셀 실행
@@ -174,7 +174,7 @@ for domain, prompts in domain_prompts.items():
 
 - 각 도메인의 텍스트 프롬프트를 CLIP 텍스트 인코더로 벡터화
 - 출력 없음 — 정상입니다
-- 완료 후 `domain_features` 행렬 (18 × 512) 생성됨
+- 완료 후 `domain_features` 행렬 (17 × 512) 생성됨
 
 ### 6. MTA 함수 정의 셀 실행
 
@@ -274,5 +274,5 @@ result = estimate_domain(
 | 파라미터 | 기본값 | 범위 | 효과 |
 | --- | --- | --- | --- |
 | `n_views` | 127 | 15~255 | 높을수록 정확하지만 느림 |
-| `top_k` | 5 | 1~18 | 출력 도메인 수 |
+| `top_k` | 5 | 1~17 | 출력 도메인 수 |
 | `show_plot` | True | True/False | 시각화 on/off |
