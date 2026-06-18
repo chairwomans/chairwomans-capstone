@@ -70,10 +70,17 @@ async function runDemo(){
   const topDomain = data.predicted_domain;
   const topWeight = data.weights[topDomain];
 
-  const md=document.getElementById('mdots');md.innerHTML='';
-  const oc=Math.floor(4+Math.random()*9);
-  for(let i=0;i<44;i++){const d=document.createElement('div');d.className='mdot'+(i<oc?' out':'');md.appendChild(d);}
-  document.getElementById('mnote').innerHTML=`<strong>${oc}개</strong> outlier 제거 → robust mode m* 획득`;
+  const md=document.getElementById('mdots');
+  md.innerHTML='';
+
+  for(let i=0;i<44;i++){
+    const d=document.createElement('div');
+    d.className='mdot';
+    md.appendChild(d);
+  }
+
+  document.getElementById('mnote').innerHTML=
+    `inlierness 기반 robust mode m* 계산 완료`;
 
   document.getElementById('rhdomain').innerHTML=`${domEmj(topDomain)} <span class="dem">${topDomain}</span>`;
   document.getElementById('rhconf').textContent=`Confidence ${(topWeight*100).toFixed(0)}%`;
