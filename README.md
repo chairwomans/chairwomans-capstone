@@ -256,9 +256,17 @@ chairwomans-capstone/
 │   ├── MTA_mode.ipynb               #   MTA solve_mta() 수렴 과정 및 mode 시각화 실험
 │   └── research.md                  #   어느 파일 있는지 요약
 ├── docs/                            # 프로젝트 문서 폴더
-│   ├── 01_이사장님_기말발표자료최종.pdf  #   스타트 최종 보고서
-│   ├── 01_이사장님_기말발표자료최종.pdf  #   스타트 기말 발표자료
+│   ├── 01_이사장님_프로젝트보고서.pdf     #   스타트 최종 보고서
+│   ├── 01_이사장님_기말발표자료최종.pdf   #   스타트 기말 발표자료
+│   ├── AI_TRANSPARENCY.md           #   AI 활용 내역, 검증 과정 및 연구 투명성 보고서
+│   ├── ARCHITECTURE.md              #   전체 시스템 구조 및 연구 파이프라인 설명
+│   ├── DATASETS.md                  #   사용 데이터셋 및 선정 근거 정리
+│   ├── EXPERIMENTS.md               #   실험 설계, 평가 방법 및 주요 결과 정리
 │   ├── Ideation.md                  #   연구 배경, 아이디어 도출 과정, 핵심 가설
+│   ├── LIMITATIONS_AND_FUTURE_WORK.md # 현재 한계점 및 향후 연구 계획
+│   ├── MTA.md                       #   MTA(Mean-Shift Test-time Adaptation) 분석 문서
+│   ├── PROMPTS.md                   #   도메인 프롬프트 설계 과정 및 구성 설명
+│   ├── REPRODUCIBILITY.md           #   실험 재현 방법 및 실행 가이드
 │   ├── Related_work.md              #   TPT·MaPLe·MTA 논문 분석 및 본 연구와의 차별점 정리
 │   ├── Team_Ground_Rule.md          #   팀 협업 규칙 (소통·회의·PR 규약)
 │   ├── elevator_speech.md           #   프로젝트 소개문
