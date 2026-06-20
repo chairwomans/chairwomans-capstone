@@ -285,7 +285,34 @@ chairwomans-capstone/
 
 <br>
 
-## 9. 참고 자료
+## 9. 현재 구현 상황
+
+현재 repository에서 실행 가능한 구현 범위는 다음과 같습니다.
+
+- CLIP ViT-B/32 기반 이미지 임베딩 추출
+- RandomResizedCrop 기반 128 view 생성
+- MeanShift 기반 MTA robust mode 계산
+- 17개 도메인 프롬프트 기반 domain estimation
+- FastAPI 기반 웹 데모
+- Google Colab self-demo
+
+현재 데모는 전체 zero-shot class classification 이전 단계인 domain estimation module의 초기 검증용입니다.
+
+<br>
+
+## 10. 진행 예정
+
+- Stable Diffusion V2 augmentation 통합
+- RandomCrop + Stable Diffusion 조합 실험
+- Domain-weighted text embedding 구현
+- Domain-weighted image embedding 및 hint token 실험
+- PACS / ImageNet-R / ImageNet-Sketch 기반 정량 평가
+- CLIP, TPT, DiffTPT, MaPLe baseline 비교
+- 최종 zero-shot class classification pipeline 완성
+
+<br>
+
+## 11. 참고 자료
 
 | 자료 | 링크 |
 | --- | --- |
@@ -305,6 +332,6 @@ chairwomans-capstone/
 
 <br>
 
-## 10. 라이선스
+## 12. 라이선스
  
 This project is licensed under the MIT License.
